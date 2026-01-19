@@ -61,8 +61,11 @@ function extractHexes(line: string): string[] {
 }
 
 function resolvePalettePath(): string {
-  const candidate = path.resolve(process.cwd(), "..", "palette.md");
-  return candidate;
+  const inProjectRoot = path.resolve(process.cwd(), "palette.md");
+  if (fs.existsSync(inProjectRoot)) return inProjectRoot;
+
+  const legacyParent = path.resolve(process.cwd(), "..", "palette.md");
+  return legacyParent;
 }
 
 export function getEverforestPalette(): EverforestPalette {
@@ -70,7 +73,11 @@ export function getEverforestPalette(): EverforestPalette {
 
   const palettePath = resolvePalettePath();
   if (!fs.existsSync(palettePath)) {
-    throw new Error(`palette.md not found at ${palettePath}`);
+    const attempted = [
+      path.resolve(process.cwd(), "palette.md"),
+      path.resolve(process.cwd(), "..", "palette.md"),
+    ];
+    throw new Error(`palette.md not found. Tried: ${attempted.join(", ")}`);
   }
 
   const content = fs.readFileSync(palettePath, "utf8");

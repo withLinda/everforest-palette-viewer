@@ -14,7 +14,7 @@ export default function ErrorPage({
           Could not load palette
         </h1>
         <p className="text-sm opacity-80">
-          Expected `palette.md` one level above this Next.js app.
+          Expected `palette.md` in the project root (or one level above).
         </p>
       </div>
 
