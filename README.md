@@ -2,6 +2,10 @@
 
 Browse Everforest palettes in your browser and copy HEX codes with a click.
 
+## Live Demo
+
+https://everforest.withlinda.dev
+
 ## Screenshots
 
 <p align="center">
